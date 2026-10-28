@@ -1,0 +1,47 @@
+class Engine:
+    def __init__(self, horsepower: int, fuel_type: str):
+        self.horsepower = horsepower
+        self.fuel_type = fuel_type
+
+    def start_engine(self) -> str:
+        return f"Двигун запущено. Потужність: {self.horsepower} к.с. ({self.fuel_type})."
+
+class GPSNavigation:
+    def __init__(self, maps_version: str, has_autopilot: bool):
+        self.maps_version = maps_version
+        self.has_autopilot = has_autopilot
+
+    # Ексклюзивний метод другого класу
+    def navigate_to(self, destination: str) -> str:
+        return f"Плотуємо маршрут до {destination} {maps_version}."
+
+class SmartCar(Engine, GPSNavigation):
+    def __init__(self, brand: str, horsepower: int, fuel_type: str, maps_version: str, has_autopilot: bool):
+        Engine.__init__(self, horsepower, fuel_type)
+        GPSNavigation.__init__(self, maps_version, has_autopilot)
+
+        self.brand = brand
+        складного(дочірнього)
+        класу
+
+    def car_info(self) -> str:
+        autopilot_status = "так" if self.has_autopilot else "ні"
+        return (
+            f"Автомобіль: {self.brand}\n"
+            f"- Потужність: {self.horsepower} к.с. ({self.fuel_type})\n"
+            f"- Автопілот: {autopilot_status}"
+        )
+
+if __name__ == "__main__":
+
+    my_car = SmartCar(
+        brand="Tesla Model S",
+        horsepower=670,
+        fuel_type="Електричний",
+        maps_version="v2026.4",
+        has_autopilot=True
+    )
+
+    print(my_car.car_info())
+    print(my_car.start_engine())
+    print(my_car.navigate_to("вулиця Хрещатик, Київ"))
