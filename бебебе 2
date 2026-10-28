@@ -1,0 +1,72 @@
+from datetime import datetime
+
+class Task:
+    def __init__(self, title: str, description: str, deadline: str):
+        self.title = title
+        self.description = description
+        self.deadline = deadline
+        self.is_completed = False
+
+    def mark_as_completed(self):
+        """Відмічає завдання як виконане."""
+        self.is_completed = True
+
+    def __str__(self):
+        status = "Виконано" if self.is_completed else "Не виконано"
+        return f"[{status}] {self.title} (Дедлайн: {self.deadline})\n    Опис: {self.description}"
+
+
+class TaskManager:
+    def __init__(self):
+        self.tasks = []
+
+    def add_task(self, title: str, description: str, deadline: str):
+        """Додає нове завдання до списку."""
+        new_task = Task(title, description, deadline)
+        self.tasks.append(new_task)
+        print(f"Завдання '{title}' успішно додано.")
+
+    def remove_task(self, title: str):
+        """Видаляє завдання за його назвою."""
+        for task in self.tasks:
+            if task.title.lower() == title.lower():
+                self.tasks.remove(task)
+                print(f"Завдання '{title}' видалено.")
+                return
+        print(f"Завдання з назвою '{title}' не знайдено.")
+
+    def mark_task_as_completed(self, title: str):
+        """Знаходить завдання за назвою та відмічає його як виконане."""
+        for task in self.tasks:
+            if task.title.lower() == title.lower():
+                task.mark_as_completed()
+                print(f"Завдання '{title}' відмічено як виконане.")
+                return
+        print(f"Завдання з назвою '{title}' не знайдено.")
+
+    def display_tasks(self):
+        """Виводить список усіх завдань."""
+        if not self.tasks:
+            print("Список завдань порожній.")
+            return
+
+        print("\n--- Список завдань ---")
+        for index, task in enumerate(self.tasks, start=1):
+            print(f"{index}. {task}")
+        print("----------------------\n")
+
+if __name__ == "__main__":
+    manager = TaskManager()
+
+    manager.add_task("Купити продукти", "Молоко, хліб, яйця, яблука", "2026-10-29")
+    manager.add_task("Підготувати звіт", "Зробити фінансовий звіт за третій квартал", "2026-11-01")
+
+    manager.display_tasks()
+
+    manager.mark_task_as_completed("Купити продукти")
+
+    manager.display_tasks()
+
+    manager.remove_task()
+
+    manager.display_tasks()
