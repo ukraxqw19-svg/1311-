@@ -1,0 +1,17 @@
+import colorama
+import inspect
+
+# Ініціалізація colorama для коректної роботи
+colorama.init()
+
+print("--- Список усіх доступних атрибутів та методів ---")
+print(dir(colorama))
+
+print("\n--- Документація та структура основних класів ---")
+# Отримуємо інформацію про головні класи всередині бібліотеки
+for name, obj in inspect.getmembers(colorama):
+    if inspect.isclass(obj) and name in ['Fore', 'Back', 'Style']:
+        print(f"\nКлас: {name}")
+        # Виводимо тільки публічні атрибути класу (кольори/стилі)
+        attrs = [attr for attr in dir(obj) if not attr.startswith('_')]
+        print(f"Доступні константи: {attrs}")
