@@ -1,0 +1,19 @@
+class PowerOfTwoIterator:
+
+  def __init__(self, max_exponent=None):
+    self.n = 0
+    self.max_exponent = max_exponent
+
+  def __iter__(self):
+    return self
+
+  def __next__(self):
+    if self.max_exponent is not None and self.n > self.max_exponent:
+      raise StopIteration
+    result = 2**self.n
+    self.n += 1
+    return result
+
+iter_2 = PowerOfTwoIterator(max_exponent=5)
+for val in iter_2:
+  print(val)  # 1, 2, 4, 8, 16, 32
