@@ -1,0 +1,26 @@
+import logging
+
+logging.basicConfig(
+    filename="app_errors.log",
+    level=logging.ERROR,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    encoding="utf-8",
+)
+
+
+def divide_numbers(a, b):
+  try:
+    result = a / b
+    return result
+  except ZeroDivisionError as e:
+
+    logging.error(
+        f"Спроба ділення на нуль! Текст винятку: {e}", exc_info=True
+    )
+  except TypeError as e:
+
+    logging.exception(f"Неправильний тип даних для ділення: {e}")
+  return None
+
+divide_numbers(10, 0)
+divide_numbers(10, "5")
